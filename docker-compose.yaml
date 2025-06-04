@@ -1,6 +1,6 @@
 services:
   laravel.test:
-    image: " image: laravelsail/php83-composer:latest"
+    image: laravelsail/php83-composer
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
@@ -19,6 +19,7 @@ services:
     depends_on:
       - mysql
       - redis
+
   mysql:
     image: "mysql/mysql-server:8.0"
     ports:
@@ -43,6 +44,7 @@ services:
         - "-p${DB_PASSWORD}"
       retries: 3
       timeout: 5s
+
   redis:
     image: "redis:alpine"
     ports:
@@ -58,9 +60,11 @@ services:
         - ping
       retries: 3
       timeout: 5s
+
 networks:
   sail:
     driver: bridge
+
 volumes:
   sail-mysql:
     driver: local
